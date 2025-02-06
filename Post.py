@@ -5,13 +5,17 @@ from helpers import screen
 
 
 class Post:
-    """
-    A class used to represent post on Nitzagram
-    """
-    def __init__(self): #TODO: add parameters
-        #TODO: write me!
-        pass
+    def __init__(self, username, location, description, likes_counter, comments): #TODO: add parameters
+        self.username = username
+        self.location = location
+        self.description = description
+        self.likes_counter = likes_counter
+        self.comments = comments
 
+    def add_like(self):
+        self.likes_counter += 1
+    def add_comment(self, text):
+        self.comments.append(text)
     def display(self):
         """
         Display the Post image/Text, description, location, likes and comments
