@@ -1,11 +1,11 @@
 import pygame
-
+from Comment import *
 from constants import *
 from helpers import screen
 
 
 class Post:
-    def __init__(self, username, location, description, likes_counter, comments): #TODO: add parameters
+    def __init__(self, username, location, description, likes_counter, comments):
         self.username = username
         self.location = location
         self.description = description
@@ -15,16 +15,16 @@ class Post:
     def add_like(self):
         self.likes_counter += 1
     def add_comment(self, text):
-        self.comments.append(text)
+        if isinstance(text, Comment):
+            self.comments.append(text)
     def display(self):
-        """
-        Display the Post image/Text, description, location, likes and comments
-        on screen
-
-        :return: None
-        """
-        # TODO: write me!
-        pass
+        font = pygame.font.SysFont("chalkduster.ttf", UI_FONT_SIZE)
+        description_surface = font.render(self.description, True, BLACK)
+        screen.blit(description_surface, (DESCRIPTION_TEXT_X_POS, DESCRIPTION_TEXT_Y_POS))
+        location_surface = font.render(self.location, True, GREY)
+        screen.blit(location_surface, (LOCATION_TEXT_X_POS, LOCATION_TEXT_Y_POS))
+        likes_surface = font.render(f"{self.likes_counter} likes", True, BLACK)
+        screen.blit(likes_surface, (LIKE_TEXT_X_POS, LIKE_TEXT_Y_POS))
 
 
     def display_comments(self):
